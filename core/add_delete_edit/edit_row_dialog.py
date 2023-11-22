@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QPushButton, QMessa
 from PyQt5.QtCore import Qt, QVariant
 import re
 
+
 class EditRowDialog(QDialog):
     def __init__(self, model, row, parent=None):
         super().__init__(parent)

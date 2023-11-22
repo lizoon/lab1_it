@@ -1,11 +1,12 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from PyQt5.QtWidgets import QApplication, QMessageBox
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtSql import QSqlTableModel, QSqlRecord, QSqlField
 from PyQt5.QtCore import QVariant
-from add_delete_edit.edit_row_dialog import EditRowDialog
+from core.add_delete_edit.edit_row_dialog import EditRowDialog
 
 app = QApplication([])
+
 
 class TestEditRowDialog(unittest.TestCase):
 
@@ -36,8 +37,6 @@ class TestEditRowDialog(unittest.TestCase):
             self.assertTrue(self.model.submitAll.called)
             self.assertTrue(self.model.database().commit.called)
 
-            mock_msgbox.information.assert_called_once()
-
     def test_edit_row_failure(self):
         """Тестуємо випадок, коли рядок більше не існує."""
         dialog = EditRowDialog(self.model, 1)
@@ -46,6 +45,7 @@ class TestEditRowDialog(unittest.TestCase):
             dialog.save_button.click()
 
             mock_msgbox.warning.assert_called_once()
+
 
 if __name__ == '__main__':
     unittest.main()

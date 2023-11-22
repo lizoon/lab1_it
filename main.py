@@ -1,11 +1,11 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTableView, QVBoxLayout, QWidget, QTabWidget, QMessageBox, QPushButton, QToolBar, QDialog
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
-from menu import create_menu
-from table_menu import create_table_menu
+from core.menu import create_menu
+from core.table_menu import create_table_menu
 import sys
-from add_delete_edit.add_row_dialog import AddRowDialog
-from add_delete_edit.delete_row_dialog import DeleteRowDialog
-from add_delete_edit.edit_row_dialog import EditRowDialog
+from core.add_delete_edit.add_row_dialog import AddRowDialog
+from core.add_delete_edit.delete_row_dialog import DeleteRowDialog
+from core.add_delete_edit.edit_row_dialog import EditRowDialog
 
 
 class MainWindow(QMainWindow):
@@ -58,6 +58,7 @@ class MainWindow(QMainWindow):
             model = QSqlTableModel(self, self.db)
             model.setTable(table)
             model.select()
+
             table_view.setModel(model)
             layout.addWidget(table_view)
             self.tab_widget.addTab(tab, table)
@@ -81,6 +82,7 @@ class MainWindow(QMainWindow):
             dialog = DeleteRowDialog(current_model, current_index.row(), self)
             if dialog.exec_() == QDialog.Accepted:
                 current_model.select()
+
     def edit_row(self):
         current_model = self.get_current_model()
         current_index = self.get_current_index()
@@ -100,6 +102,8 @@ class MainWindow(QMainWindow):
         if current_widget:
             return current_widget.findChild(QTableView).currentIndex()
         return None
+
+
 def main():
     app = QApplication(sys.argv)
     mainWin = MainWindow()

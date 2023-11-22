@@ -1,6 +1,7 @@
 import sqlite3
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
+
 class CreateDbDialog(QDialog):
     def __init__(self, parent=None):
         super(CreateDbDialog, self).__init__(parent)

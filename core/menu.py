@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QAction, QFileDialog, QMessageBox
-from create_db.create_db_dialog import CreateDbDialog
-from CompareTablesDialog import CompareTablesDialog
+from core.create_db.create_db_dialog import CreateDbDialog
+from core.compare_tables.CompareTablesDialog import CompareTablesDialog
+
+
 def create_menu(window):
 
     file_menu = window.menu_bar.addMenu("Файл")
@@ -25,9 +27,11 @@ def create_menu(window):
     exit_action.triggered.connect(window.close)
     file_menu.addAction(exit_action)
 
+
 def open_create_db_dialog(parent):
     dialog = CreateDbDialog(parent)
     dialog.exec_()
+
 
 def open_db(parent):
     options = QFileDialog.Options()
@@ -41,6 +45,7 @@ def open_db(parent):
         except Exception as e:
             QMessageBox.warning(parent, "Помилка", f"Помилка при відкритті бази даних: {e}")
 
+
 def refresh_db(window):
     if hasattr(window, 'current_db_path') and window.current_db_path:
         try:
@@ -50,6 +55,7 @@ def refresh_db(window):
             QMessageBox.warning(window, "Помилка", f"Помилка при оновленні бази даних: {e}")
     else:
         QMessageBox.warning(window, "Помилка", "Жодної бази даних не відкрито для оновлення.")
+
 
 def open_compare_tables_dialog(parent):
     dialog = CompareTablesDialog(parent)

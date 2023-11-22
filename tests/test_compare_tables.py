@@ -2,13 +2,12 @@ import unittest
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
 
-from CompareTablesDialog import CompareTablesDialog
+from core.compare_tables.CompareTablesDialog import CompareTablesDialog
 
 app = QApplication([])
 
 
 class TestCompareTables(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.db = QSqlDatabase.addDatabase('QSQLITE')

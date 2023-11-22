@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import (
     QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton, QMessageBox
 )
 
+
 class DeleteTableDialog(QDialog):
     def __init__(self, db_path, parent=None):
         super().__init__(parent)

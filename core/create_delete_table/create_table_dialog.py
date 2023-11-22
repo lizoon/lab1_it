@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import (
     QPushButton, QComboBox, QMessageBox, QFormLayout
 )
 
+
 class CreateTableDialog(QDialog):
     def __init__(self, db_path, parent=None):
         super().__init__(parent)
@@ -55,14 +56,14 @@ class CreateTableDialog(QDialog):
                 column_type = "TEXT"
             elif column_type == "complexReal":
                 column_type = "TEXT"
+            elif column_type == "char":
+                column_type = "CHAR"
             elif column_type == "string":
                 column_type = "TEXT"
             elif column_type == "integer":
                 column_type = "INTEGER"
             elif column_type == "real":
                 column_type = "REAL"
-            elif column_type == "char":
-                column_type = "CHAR"
 
             if column_name:
                 column_definitions.append(f'"{column_name}" {column_type}')

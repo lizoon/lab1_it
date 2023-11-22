@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QAction, QFileDialog
-from create_delete_table.create_table_dialog import CreateTableDialog
-from create_delete_table.delete_table_dialog import DeleteTableDialog
+from core.create_delete_table.create_table_dialog import CreateTableDialog
+from core.create_delete_table.delete_table_dialog import DeleteTableDialog
 
 
 def create_table_menu(window):
@@ -23,6 +23,7 @@ def open_create_table_dialog(parent):
     if db_file_name:
         dialog = CreateTableDialog(db_file_name, parent)
         dialog.exec_()
+
 
 def open_delete_table_dialog(parent):
     options = QFileDialog.Options()

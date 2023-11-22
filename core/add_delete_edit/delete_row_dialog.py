@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QMessageBox
 
+
 class DeleteRowDialog(QDialog):
     def __init__(self, model, row, parent=None):
         super().__init__(parent)

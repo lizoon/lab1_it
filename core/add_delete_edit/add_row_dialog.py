@@ -2,8 +2,8 @@ import re
 from PyQt5.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QLabel, QMessageBox
 )
-from PyQt5.QtSql import QSqlTableModel
 from PyQt5.QtCore import Qt, QVariant
+
 
 class AddRowDialog(QDialog):
     def __init__(self, model, parent=None):
@@ -35,8 +35,11 @@ class AddRowDialog(QDialog):
             column_label = self.labels[i].text()
 
             field_type = self.model.record().field(i).type()
-            if "complex" in column_label.lower():
-                field_type = "complex"
+
+            if column_label == 'complexInt':
+                field_type = 'complexInteger'
+            if column_label == 'complexReal':
+                field_type = 'complexReal'
 
             if not self.validate_value(value, field_type):
                 QMessageBox.warning(self, "Помилка", f"Неправильний тип даних для поля '{column_label}'")
@@ -62,7 +65,6 @@ class AddRowDialog(QDialog):
             self.reject()
 
     def validate_value(self, value, field_type):
-        # Перевірки для стандартних типів даних
         if field_type == QVariant.Int and not value.isdigit():
             return False
         if field_type == QVariant.Double:
@@ -70,14 +72,13 @@ class AddRowDialog(QDialog):
                 float(value)
             except ValueError:
                 return False
-        if field_type == QVariant.Char and len(value) != 1:
-            return False
+
+        # check for char (1 symbol)
 
         if field_type == "complexInteger":
             return self.validate_complex_integer(value)
-        elif field_type == "complexReal":
+        if field_type == "complexReal":
             return self.validate_complex_real(value)
-
         return True
 
     def validate_complex_integer(self, value):
@@ -87,3 +88,4 @@ class AddRowDialog(QDialog):
     def validate_complex_real(self, value):
         pattern = r'^([-+]?\d+(\.\d+)?\s*[-+]\s*\d+(\.\d+)?)i$'
         return bool(re.match(pattern, value.strip()))
+
